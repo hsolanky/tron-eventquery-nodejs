@@ -26,7 +26,7 @@ const transactionSchema = new mongoose.Schema({
     assetAmount : Number,
     latestSolidifiedBlockNumber : Number,
     data : String,
-})
+}, { collection: 'transaction' })
 
 transactionSchema.set('toJSON', {
     transform: (document, returnedObject) => {

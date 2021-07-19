@@ -22,7 +22,7 @@ const transactionSchema = new mongoose.Schema({
     eventName : String,
     topicMap : Object,
     dataMap : Object
-})
+}, { collection: 'contractevent' })
 
 transactionSchema.set('toJSON', {
     transform: (document, returnedObject) => {
