@@ -31,10 +31,10 @@ transactionsRouter.get('/:transactionId', async (request, response) => {
 transactionsRouter.get('/', async (request, response) => {
     let findCondition = {}
     let { limit, skip, sortField, from, to, token, timeStampGT, sortOrder} = request.query
-    limit = limit | 25
-    skip = skip | 0
-    sortField = sortField | 'timeStamp'
-    sortOrder = sortOrder | -1
+    limit = limit  || 25
+    skip = skip || 0
+    sortField = sortField || 'timeStamp'
+    sortOrder = sortOrder || -1
     let sortObject = {}
     sortObject[sortField] = sortOrder
 
