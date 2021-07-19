@@ -21,7 +21,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
 app.use(express.json())
 app.use(middleware.requestLogger)
 
-app.use('/transfers', transactionsRouter)
+app.use('/transactions', transactionsRouter)
 
 app.use(middleware.errorHandler)
 

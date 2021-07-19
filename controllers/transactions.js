@@ -10,7 +10,7 @@ const Transaction = require('../models/Transaction');
 
 transactionsRouter.get('/:transactionId', async (request, response) => {
     let transactionId = request.params.transactionId
-    let transaction = Transaction.findOne({ transactionId })
+    let transaction = await Transaction.findOne({ transactionId })
     response.json(transaction)
 })
 
@@ -50,7 +50,7 @@ transactionsRouter.get('/', async (request, response) => {
     if (timeStampGT) {
         findCondition['timeStamp'] = { $gt : timeStampGT}
     }
-    let matchingTransactions = Transaction.find(findCondition).sort(sortObject).limit(limit).skip(skip)
+    let matchingTransactions = await Transaction.find(findCondition).sort(sortObject).limit(limit).skip(skip)
     response.json(matchingTransactions)
 })
 
