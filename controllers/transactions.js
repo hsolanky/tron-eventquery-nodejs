@@ -11,7 +11,7 @@ const Transaction = require('../models/Transaction');
 transactionsRouter.get('/:transactionId', async (request, response) => {
     let transactionId = request.params.transactionId
     let transaction = await Transaction.findOne({ transactionId })
-    response.json(transaction)
+    response.json({ data : transaction })
 })
 
 /**
@@ -24,13 +24,13 @@ transactionsRouter.get('/:transactionId', async (request, response) => {
  * @param {string} from from address, default is "".
  * @param {string} to from address, default is "".
  * @param {string} token AssetName of the transaction Object, default is "".
- * @param {number} timeStampGT (short for timeStamp greater than)timestamp after which to return Transactions, default is 0.
- * @return {object} Transaction Object.
+ * @param {number} since (also timeStamp greater than) timestamp after which to return Transactions, default is 0.
+ * @return {object} Transaction Object List.
  */
 
 transactionsRouter.get('/', async (request, response) => {
     let findCondition = {}
-    let { limit, skip, sortField, from, to, token, timeStampGT, sortOrder} = request.query
+    let { limit, skip, sortField, from, to, token, since, sortOrder} = request.query
     limit = limit  || 25
     skip = skip || 0
     sortField = sortField || 'timeStamp'
@@ -47,11 +47,11 @@ transactionsRouter.get('/', async (request, response) => {
     if (token) {
         findCondition['assetName'] = token
     }
-    if (timeStampGT) {
-        findCondition['timeStamp'] = { $gt : timeStampGT}
+    if (since) {
+        findCondition['timeStamp'] = { $gt : since}
     }
     let matchingTransactions = await Transaction.find(findCondition).sort(sortObject).limit(limit).skip(skip)
-    response.json(matchingTransactions)
+    response.json({ result : matchingTransactions.length , data : matchingTransactions })
 })
 
 
