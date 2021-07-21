@@ -9,7 +9,7 @@ const ContractEvent = require('../models/ContractEvent');
  * @return {object} Event Object.
  */
 
- transactionsRouter.get('/:transactionId', async (request, response) => {
+ contractEventssRouter.get('/:transactionId', async (request, response) => {
     let transactionId = request.params.transactionId
     let event = await ContractEvent.findOne({ transactionId })
     response.json({ data : event })
@@ -30,7 +30,7 @@ const ContractEvent = require('../models/ContractEvent');
  * @return {object} Event Object List.
  */
 
-transactionsRouter.get('/:contractAddress', async (request, response) => {
+ contractEventssRouter.get('/:contractAddress', async (request, response) => {
     let findCondition = {}
     let { limit, skip, sortField, sortOrder, from, to, eventName, since } = request.query
     limit = limit  || 25
