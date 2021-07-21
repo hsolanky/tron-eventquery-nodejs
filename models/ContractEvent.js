@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 mongoose.set('useFindAndModify', false)
 
-const transactionSchema = new mongoose.Schema({
+const contractEventSchema = new mongoose.Schema({
     timeStamp : Object,
     triggerName : String,
     uniqueId : String,
@@ -24,7 +24,7 @@ const transactionSchema = new mongoose.Schema({
     dataMap : Object
 }, { collection: 'contractevent' })
 
-transactionSchema.set('toJSON', {
+contractEventSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
       delete returnedObject._id
@@ -32,4 +32,4 @@ transactionSchema.set('toJSON', {
     }
   })
   
-  module.exports = mongoose.model('Transaction', transactionSchema)
+  module.exports = mongoose.model('ContractEvent', contractEventSchema)
