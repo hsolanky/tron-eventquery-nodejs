@@ -30,16 +30,19 @@ const ContractEvent = require('../models/ContractEvent');
  * @return {object} Event Object List.
  */
 
- contractEventssRouter.get('/:contractAddress', async (request, response) => {
+ contractEventssRouter.get('/', async (request, response) => {
     let findCondition = {}
-    let { limit, skip, sortField, sortOrder, from, to, eventName, since } = request.query
+    let { contractAddress, limit, skip, sortField, sortOrder, from, to, eventName, since } = request.query
     limit = Number(limit)  || 25
     skip = skip || 0
     sortField = sortField || 'timeStamp'
     sortOrder = sortOrder || -1
     let sortObject = {}
     sortObject[sortField] = sortOrder
-
+    
+    if (contractAddress) {
+        findCondition['contractAddress'] = contractAddress
+    }
     if (from) {
         findCondition['topicMap.from'] = from
     }
