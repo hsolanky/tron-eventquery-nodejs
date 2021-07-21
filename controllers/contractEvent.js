@@ -53,7 +53,7 @@ const ContractEvent = require('../models/ContractEvent');
         findCondition['eventName'] = eventName
     }
     if (since) {
-        findCondition['timeStamp'] = { $gt : since }
+        findCondition['timeStamp'] = { $gt : Number(since) }
     }
     let matchingEvents = await ContractEvent.find(findCondition).sort(sortObject).limit(limit).skip(skip)
     response.json({ result : matchingEvents.length , data : matchingEvents })

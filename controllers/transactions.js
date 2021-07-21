@@ -48,7 +48,7 @@ transactionsRouter.get('/', async (request, response) => {
         findCondition['assetName'] = token
     }
     if (since) {
-        findCondition['timeStamp'] = { $gt : since}
+        findCondition['timeStamp'] = { $gt : Number(since)}
     }
     let matchingTransactions = await Transaction.find(findCondition).sort(sortObject).limit(limit).skip(skip)
     response.json({ result : matchingTransactions.length , data : matchingTransactions })
