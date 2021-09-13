@@ -9,6 +9,7 @@ const logger = require('./utils/logger')
 const mongoose = require('mongoose');
 
 const transactionsRouter = require('./controllers/transactions')
+const blocksRouter = require('./controllers/block')
 const contractEventsRouter = require('./controllers/contractEvent')
 
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -24,6 +25,7 @@ app.use(middleware.requestLogger)
 
 app.use('/transactions', transactionsRouter)
 app.use('/contractEvents', contractEventsRouter)
+app.use('/blocks', blocksRouter)
 
 app.use(middleware.errorHandler)
 
