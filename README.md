@@ -1,7 +1,6 @@
 # Tron EventQuery in NodeJS
 ## Fast, Extendable and Scaleable EventQuery Server implementation for TronNode
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 This is a EventQuery Server that can be used to query transactions, block, contractEvent information from your TronNode when run parallel with the Tron MongoDB Plugin.
 
@@ -35,7 +34,28 @@ npm install
 
 ## Usage
 
-To be Updated!
+```sh
+Transaction or Transfers Endpoint
+$baseURL/transactions
+
+Usage With Filters
+$baseURL/transactions?token=TRX&to=TRbY18Dfdf8ipMeTRhXqNnqYttazSmF2W1&since=1630164995121&limit=10
+
+This returns all the transfers that are to the above specified address since the above specified time having the token TRX
+```
+
+List of all available Filters
+
+| FilterKey | Type | Explanation |
+| ------ | ------ | ------ |
+| limit | number | number of transactions to return, default is 25. |
+| skip | number | number of transactions to Skip, default is 0. |
+| sortField | string | sort Field, default is sort by timeStamp |
+| sortOrder | number | sort order, default is descending order. |
+| from | string | from address, default is "". |
+| to | string | to address, default is "". |
+| token | string | AssetName of the transaction Object, default is "". |
+| since | number | (also timeStamp greater than) timestamp after which to return Transactions, default is 0. |
 
 ## License
 
